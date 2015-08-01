@@ -39,7 +39,9 @@ router.get('/check', function(req, res, next) {
 });
 
 router.post('/check', function (req, res, nect) {
-  console.log(req);
+  parseString(req, function (err, result) {
+    console.log(result);
+  });
 });
 
 
