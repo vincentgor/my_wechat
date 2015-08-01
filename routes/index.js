@@ -7,20 +7,18 @@ var conf = require('../conf').conf;
 var TReq = require('../model/textMessageReq').textMessageReq;
 var TResp = require('../model/textMessageResp').textMessageResp;
 
-var paser = new xml2js.Parser;
-var builder = new xml2js.Builder({rootName: 'xml', headless:true});
+var parse = new xml2js.Parser;
+var builder = new xml2js.Builder({rootName: 'xml', headless:true});   //去掉xml格式说明
 
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  var xml = builder.buildObject({a:'11', b:'22'});
-  res.end(xml);
-//  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Express' });
 });
 
-/* GET home page. */
-router.get('/check', function(req, res, next) {
+/* 微信验证接口. */
+router.get('/wechat', function(req, res, next) {
   var signature = req.param('signature');   //微信加密签名
   console.log('signature: ' + signature);
   var timestamp = req.param('timestamp');   //时间戳
@@ -46,15 +44,15 @@ router.get('/check', function(req, res, next) {
   //res.render('index', { title: 'Express' });
 });
 
-router.post('/check', function (req, res, nect) {
-
-  var data = '';
+/* 微信消息处理接口 */
+router.post('/wechat', function (req, res, nect) {
+  var tempData = '';
   req.on('data', function (chunk) {
-    data += chunk;
+    tempData += chunk;
   })
   req.on('end', function() {
-    console.log(data);
-    parseString(data, {explicitArray: false, trim: true}, function (err, result) {
+    console.log(tempData);
+    parseString(tempData, {explicitArray: false, trim: true}, function (err, result) {
       var textReq = TReq.init(result.xml);
       console.log(result);
       console.log(textReq);
@@ -72,6 +70,5 @@ router.post('/check', function (req, res, nect) {
     });
   });
 });
-
 
 module.exports = router;
