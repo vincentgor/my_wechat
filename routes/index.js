@@ -4,6 +4,7 @@ var xml2js = require('xml2js');
 var parseString = xml2js.parseString;
 
 var conf = require('../conf').conf;
+var T = require('./model/textMessageReq').textMessageReq;
 
 var router = express.Router();
 
@@ -40,12 +41,17 @@ router.get('/check', function(req, res, next) {
 });
 
 router.post('/check', function (req, res, nect) {
+
   var data = '';
   req.on('data', function (chunk) {
     data += chunk;
   })
   req.on('end', function() {
     console.log(data);
+    parseString(data, function (err, result) {
+      var text = T.init(data);
+      console.log(text);
+    })
   });
   res.end('');
 
