@@ -56,6 +56,7 @@ router.post('/check', function (req, res, nect) {
     console.log(data);
     parseString(data, {explicitArray: false, trim: true}, function (err, result) {
       var textReq = TReq.init(result);
+      console.log(result);
       console.log(textReq);
 
       //逻辑处理
