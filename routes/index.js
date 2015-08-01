@@ -1,6 +1,9 @@
 var express = require('express');
 var crypto = require('crypto');
+var parseString = require('xml2js').parseString;
+
 var conf = require('../conf').conf;
+
 var router = express.Router();
 
 /* GET home page. */
@@ -18,14 +21,12 @@ router.get('/check', function(req, res, next) {
   console.log('nonce: ' + nonce);
   var echostr = req.param('echostr');        //随机字符串
   console.log('echostr: ' + echostr);
-
   var tmpArr =[conf.TOKEN,timestamp,nonce];
   tmpArr.sort();
   var str = tmpArr.join('');
   console.log('排序后：'+str);
   var shasum = crypto.createHash('sha1');
   shasum.update(str);
-  console.log(str);
   var d = shasum.digest('hex');
   console.log(d);
   if(d==signature) {
@@ -37,6 +38,9 @@ router.get('/check', function(req, res, next) {
   //res.render('index', { title: 'Express' });
 });
 
+router.post('/check', function (req, res, nect) {
+  console.log(req.body);
+});
 
 
 module.exports = router;
