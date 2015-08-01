@@ -39,7 +39,7 @@ router.get('/check', function(req, res, next) {
 });
 
 router.post('/check', function (req, res, nect) {
-  console.log(req.body);
+  console.log(req);
 });
 
 
