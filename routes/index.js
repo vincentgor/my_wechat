@@ -4,8 +4,8 @@ var xml2js = require('xml2js');
 var parseString = xml2js.parseString;
 
 var conf = require('../conf').conf;
-var TReq = require('../model/textMessageReq').textMessageReq;
-var TResp = require('../model/textMessageResp').textMessageResp;
+var TReq = require('../model/messageReq/textMessageReq').textMessageReq;
+var TResp = require('../model/messageResp/textMessageResp').textMessageResp;
 
 var parse = new xml2js.Parser;
 var builder = new xml2js.Builder({rootName: 'xml', headless:true});   //去掉xml格式说明
