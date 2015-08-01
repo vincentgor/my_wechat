@@ -55,7 +55,7 @@ router.post('/check', function (req, res, nect) {
   req.on('end', function() {
     console.log(data);
     parseString(data, {explicitArray: false, trim: true}, function (err, result) {
-      var textReq = TReq.init(result);
+      var textReq = TReq.init(result.xml);
       console.log(result);
       console.log(textReq);
 
