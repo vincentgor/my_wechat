@@ -1,6 +1,7 @@
 var express = require('express');
 var crypto = require('crypto');
-var parseString = require('xml2js').parseString;
+var xml2js = require('xml2js');
+var parseString = xml2js.parseString;
 
 var conf = require('../conf').conf;
 
@@ -39,12 +40,15 @@ router.get('/check', function(req, res, next) {
 });
 
 router.post('/check', function (req, res, nect) {
-  parseString(req, function (err, result) {
-    if(err) {
-      console.log('error: ' + err);
-    }
-    console.log(result);
+  var data = '';
+  req.on('data', function (chunk) {
+    data += chunk;
+  })
+  req.on('end', function() {
+    console.log(data);
   });
+  res.end('');
+
 });
 
 
