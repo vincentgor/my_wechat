@@ -48,7 +48,7 @@ router.post('/check', function (req, res, nect) {
   })
   req.on('end', function() {
     console.log(data);
-    parseString(data, function (err, result) {
+    parseString(data, {explicitArray: false, trim: true}, function (err, result) {
       var text = T.init(result);
       console.log(result);
     })
