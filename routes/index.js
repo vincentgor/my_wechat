@@ -49,8 +49,8 @@ router.post('/check', function (req, res, nect) {
   req.on('end', function() {
     console.log(data);
     parseString(data, function (err, result) {
-      var text = T.init(data);
-      console.log(text);
+      var text = T.init(result);
+      console.log(result);
     })
   });
   res.end('');
