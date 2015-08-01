@@ -40,6 +40,9 @@ router.get('/check', function(req, res, next) {
 
 router.post('/check', function (req, res, nect) {
   parseString(req, function (err, result) {
+    if(err) {
+      console.log('error: ' + err);
+    }
     console.log(result);
   });
 });
