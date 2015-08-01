@@ -8,7 +8,7 @@ var TReq = require('../model/textMessageReq').textMessageReq;
 var TResp = require('../model/textMessageResp').textMessageResp;
 
 var paser = new xml2js.Parser;
-var builder = new xml2js.Builder;
+var builder = new xml2js.Builder({rootName: 'xml', headless:true});
 
 var router = express.Router();
 
