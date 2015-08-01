@@ -4,3 +4,5 @@
 var conf = {
   TOKEN: 'vincent_weixin'
 };
+
+exports.conf = conf;
