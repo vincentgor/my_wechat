@@ -60,18 +60,17 @@ router.post('/check', function (req, res, nect) {
       console.log(textReq);
 
       //逻辑处理
-      textReq.content = '傻逼';
+      textReq.Content = '傻逼';
 
       //响应消息
       var textResp = TResp.init(textReq);
       console.log(textResp);
       var xml = builder.buildObject(textResp);
       res.end(xml);
+      console.log(xml);
       return;
     });
   });
-  res.end('');
-
 });
 
 
