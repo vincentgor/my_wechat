@@ -66,8 +66,8 @@ router.post('/check', function (req, res, nect) {
       var textResp = TResp.init(textReq);
       console.log(textResp);
       var xml = builder.buildObject(textResp);
-      res.end(xml);
       console.log(xml);
+      res.end(xml);
       return;
     });
   });
