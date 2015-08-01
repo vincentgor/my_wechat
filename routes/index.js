@@ -59,6 +59,7 @@ router.post('/wechat', function (req, res, nect) {
 
       //逻辑处理
       textReq.Content = '傻逼';
+      textReq.MsgType = 'text';
 
       //响应消息
       var textResp = TResp.init(textReq);
