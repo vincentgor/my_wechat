@@ -3,6 +3,7 @@
  * 微信模块
  */
 var crypto = require('crypto');
+var xml2js = require('xml2js');
 var builder = new xml2js.Builder({rootName: 'xml', headless:true});   //去掉xml格式说明
 
 var conf = require('../conf').conf;
