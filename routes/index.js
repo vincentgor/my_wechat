@@ -14,7 +14,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'hello, 粑粑' });
 });
 
 /* 微信验证接口. */
