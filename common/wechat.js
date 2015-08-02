@@ -28,7 +28,7 @@ Wechat.check = function (timestamp, nonce, signature) {
   return checkedStr==signature;
 };
 
-Wechat.process = function () {
+Wechat.process = function (result) {
   var textReq = TReq.init(result.xml);
 
   //逻辑处理
