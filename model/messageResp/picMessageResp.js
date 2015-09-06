@@ -2,19 +2,19 @@
  * Created by vinxent on 2015/8/1.
  */
 
-var Pic = function () {
+var pic = {
 
 };
 
-Pic.init = function(data) {
-  var pic = {};
-  pic.ToUserName = data.FromUserName;
-  pic.FromUserName = data.ToUserName;
-  pic.CreateTime = data.CreateTime;
-  pic.MsgType = data.MsgType;
-  pic.Image = {};
-  pic.Image.MediaId = data.MediaId;
-  return text;
+pic.init = function(data) {
+	var pic = {};
+	pic.ToUserName = data.FromUserName;
+	pic.FromUserName = data.ToUserName;
+	pic.CreateTime = data.CreateTime;
+	pic.MsgType = data.MsgType;
+	pic.Image = {};
+	pic.Image.MediaId = data.MediaId;
+	return text;
 };
 
-exports.picMessageResp = Pic;
+exports.picMessageResp = pic;
