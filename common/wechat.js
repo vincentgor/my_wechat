@@ -2,20 +2,25 @@
  * Created by vinxent on 2015/8/2.
  * 微信模块
  */
+var events = require('events');
 var crypto = require('crypto');
 var xml2js = require('xml2js');
 var builder = new xml2js.Builder({rootName: 'xml', headless:true});   //去掉xml格式说明
 var parseString = xml2js.parseString;
+var util = require('util');
 
 var conf = require('../conf').conf;
 var TReq = require('../model/messageReq/textMessageReq').textMessageReq;
 var TResp = require('../model/messageResp/textMessageResp').textMessageResp;
 
 //微信处理类
-var wechat = {
+var wechat = function() {
+    // body...
+};
 
-}
+util.inherits(wechat, events.EventEmitter);
 
+//解析收到的数据
 wechat.init = function (req, res, next) {
     var tempData = '';  //接收到的消息
     req.on('data', function (chunk) {
@@ -24,7 +29,7 @@ wechat.init = function (req, res, next) {
     req.on('end', function() {
         console.log('接收到的消息xml为： ' + tempData);
         parseString(tempData, {explicitArray: false, trim: true}, function (err, result) {
-            req.xml = result.xml;
+            req.xml = result.xml;    //将收到的数据保存在req
             next();
         });
     });
@@ -43,7 +48,8 @@ wechat.check = function (timestamp, nonce, signature) {
     return checkedStr==signature;
 };
 
-wechat.process = function (xmlData) {
+/* 处理微信消息 */
+wechat.process = function (req, xmlData) {
     var textReq = TReq.init(xmlData);
 
     //逻辑处理
@@ -54,7 +60,8 @@ wechat.process = function (xmlData) {
     var textResp = TResp.init(textReq);
     console.log(textResp);
     var xml = builder.buildObject(textResp);
-    return xml;
+    wechat.emit('text', req, xml);
+    // return xml;
 };
 
 //导出模块
