@@ -57,14 +57,14 @@ wechat.prototype.process = function (req, xmlData) {
     var textReq = TReq.init(xmlData);
 
     //逻辑处理
-    textReq.Content = '你发送的是： ' + textReq.MsgType; + ' 消息啦啦啦'
+    textReq.Content = '你发送的是： ' + textReq.MsgType + ' 消息啦啦啦';
     textReq.MsgType = conf.TEXT;
 
     //响应消息
     var textResp = TResp.init(textReq);
     console.log(textResp);
     var xml = builder.buildObject(textResp);
-    wechat.emit('text', req, xml);
+    wechat.write(req, xml);
     // return xml;
 };
 
