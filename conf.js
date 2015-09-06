@@ -3,7 +3,7 @@
  */
 var conf = {
 	TOKEN: 'your token here',
-	TEXT: 'test',
+	TEXT: 'text',
 	IMAGE: 'image',
 	VOICE: 'voice',
 	VIDEO: 'video',
