@@ -64,7 +64,8 @@ wechat.prototype.process = function (req, xmlData) {
     var textResp = TResp.init(textReq);
     console.log(textResp);
     var xml = builder.buildObject(textResp);
-    wechat.write(req, xml);
+    console.log('write前----------------------');
+    this.write(req, xml);
     // return xml;
 };
 
