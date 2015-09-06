@@ -48,7 +48,7 @@ wechat.process = function (xmlData) {
 
     //逻辑处理
     textReq.Content = '你发送的是： ' + textReq.MsgType; + ' 消息啦啦啦'
-    textReq.MsgType = 'text';
+    textReq.MsgType = conf.TEXT;
 
     //响应消息
     var textResp = TResp.init(textReq);
