@@ -2,6 +2,7 @@
  * Created by vinxent on 2015/8/1.
  */
 var conf = {
+	
 	TOKEN: 'your token here',
 	TEXT: 'text',
 	IMAGE: 'image',
