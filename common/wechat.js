@@ -15,13 +15,17 @@ var TResp = require('../model/messageResp/textMessageResp').textMessageResp;
 
 //微信处理类
 var wechat = function() {
-    // body...
+    events.EventEmitter.call(this);
 };
 
 util.inherits(wechat, events.EventEmitter);
 
+wechat.prototype.write = function(req, xml) {
+    this.emit('text', req, xml);
+}
+
 //解析收到的数据
-wechat.init = function (req, res, next) {
+wechat.prototype.init = function (req, res, next) {
     var tempData = '';  //接收到的消息
     req.on('data', function (chunk) {
         tempData += chunk;
@@ -36,7 +40,7 @@ wechat.init = function (req, res, next) {
 }
 
 /* 验证微信消息的合法性 */
-wechat.check = function (timestamp, nonce, signature) {
+wechat.prototype.check = function (timestamp, nonce, signature) {
     var tmpArr =[conf.TOKEN,timestamp,nonce];
     tmpArr.sort();
     var str = tmpArr.join('');
@@ -49,7 +53,7 @@ wechat.check = function (timestamp, nonce, signature) {
 };
 
 /* 处理微信消息 */
-wechat.process = function (req, xmlData) {
+wechat.prototype.process = function (req, xmlData) {
     var textReq = TReq.init(xmlData);
 
     //逻辑处理

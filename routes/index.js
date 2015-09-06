@@ -2,9 +2,11 @@ var express = require('express');
 var xml2js = require('xml2js');
 var parseString = xml2js.parseString;
 
-var wechat = require('../common/wechat');    //微信模块
+var Wechat = require('../common/wechat');    //微信模块
 
 var router = express.Router();
+
+var wechat = new Wechat();
 
 /* 首页 */
 router.get('/', function(req, res, next) {
@@ -31,7 +33,6 @@ router.post('/wechat', wechat.init, function (req, res, nect) {
     
     var xml = req.xml;    //处理后的xml
     wechat.process(req, xml);    //处理后的xml
-    
 
 });
 
@@ -40,5 +41,6 @@ wechat.on('text', function(req, xml) {
     console.log('on:' + xml);
     res.end(xml);
 });
+
 
 module.exports = router;
