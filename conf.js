@@ -2,7 +2,7 @@
  * Created by vinxent on 2015/8/1.
  */
 var conf = {
-	TOKEN: 'vincent_weixin',
+	TOKEN: 'your token here',
 	TEXT: 'test',
 	IMAGE: 'image',
 	VOICE: 'voice',
