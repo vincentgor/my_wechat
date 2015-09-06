@@ -2,13 +2,11 @@ var express = require('express');
 var xml2js = require('xml2js');
 var parseString = xml2js.parseString;
 
-var wechat = require('../common/wechat');    //
-
-
+var wechat = require('../common/wechat');    //微信模块
 
 var router = express.Router();
 
-/* GET home page. */
+/* 首页 */
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'hello, 粑粑' });
 });
@@ -29,18 +27,12 @@ router.get('/wechat', function(req, res, next) {
 });
 
 /* 微信消息处理接口 */
-router.post('/wechat', function (req, res, nect) {
-    var tempData = '';  //接收到的消息
-    req.on('data', function (chunk) {
-        tempData += chunk;
-    })
-    req.on('end', function() {
-        console.log('接收到的消息xml为： ' + tempData);
-        parseString(tempData, {explicitArray: false, trim: true}, function (err, result) {
-            var xml = wechat.process(result);    //处理后的xml
-            res.end(xml);
-        });
-    });
+router.post('/wechat', wechat.init, function (req, res, nect) {
+    
+    var xml = req.xml;    //处理后的xml
+    xml = wechat.process(xml);    //处理后的xml
+    res.end(xml);
+
 });
 
 module.exports = router;

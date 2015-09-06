@@ -15,6 +15,20 @@ var wechat = {
 
 }
 
+wechat.init = function (req, res, next) {
+    var tempData = '';  //接收到的消息
+    req.on('data', function (chunk) {
+        tempData += chunk;
+    })
+    req.on('end', function() {
+        console.log('接收到的消息xml为： ' + tempData);
+        parseString(tempData, {explicitArray: false, trim: true}, function (err, result) {
+            req.xml = result.xml;
+            next();
+        });
+    });
+}
+
 /* 验证微信消息的合法性 */
 wechat.check = function (timestamp, nonce, signature) {
     var tmpArr =[conf.TOKEN,timestamp,nonce];
@@ -28,8 +42,8 @@ wechat.check = function (timestamp, nonce, signature) {
     return checkedStr==signature;
 };
 
-wechat.process = function (result) {
-    var textReq = TReq.init(result.xml);
+wechat.process = function (xmlData) {
+    var textReq = TReq.init(xmlData);
 
     //逻辑处理
     textReq.Content = '你发送的是： ' + textReq.MsgType; + ' 消息啦啦啦'
