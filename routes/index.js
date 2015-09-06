@@ -32,12 +32,12 @@ router.get('/wechat', function(req, res, next) {
 router.post('/wechat', wechat.init, function (req, res, nect) {
     
     var xml = req.xml;    //处理后的xml
-    wechat.process(req, xml);    //处理后的xml
+    wechat.process(res, xml);    //处理后的xml
 
 });
 
 //发送微信文本消息
-wechat.on('text', function(req, xml) {
+wechat.on('text', function(res, xml) {
     console.log('on:' + xml);
     res.end(xml);
 });

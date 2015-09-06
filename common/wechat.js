@@ -20,8 +20,8 @@ var wechat = function() {
 
 util.inherits(wechat, events.EventEmitter);
 
-wechat.prototype.write = function(req, xml) {
-    this.emit('text', req, xml);
+wechat.prototype.write = function(res, xml) {
+    this.emit('text', res, xml);
 }
 
 //解析收到的数据
@@ -53,7 +53,7 @@ wechat.prototype.check = function (timestamp, nonce, signature) {
 };
 
 /* 处理微信消息 */
-wechat.prototype.process = function (req, xmlData) {
+wechat.prototype.process = function (res, xmlData) {
     var textReq = TReq.init(xmlData);
 
     //逻辑处理
@@ -65,7 +65,7 @@ wechat.prototype.process = function (req, xmlData) {
     console.log(textResp);
     var xml = builder.buildObject(textResp);
     console.log('write前----------------------');
-    this.write(req, xml);
+    this.write(res, xml);
     // return xml;
 };
 
