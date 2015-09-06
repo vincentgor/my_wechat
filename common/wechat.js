@@ -18,10 +18,12 @@ var wechat = function() {
     events.EventEmitter.call(this);
 };
 
+//继承，为了得到它的事件
 util.inherits(wechat, events.EventEmitter);
 
-wechat.prototype.write = function(res, xml) {
-    this.emit('text', res, xml);
+//返回
+wechat.prototype.write = function(type, res, xml) {
+    this.emit(type, res, xml);
 }
 
 //解析收到的数据
@@ -65,7 +67,7 @@ wechat.prototype.process = function (res, xmlData) {
     console.log(textResp);
     var xml = builder.buildObject(textResp);
     console.log('write前----------------------');
-    this.write(res, xml);
+    this.write(conf.TEXT, res, xml);
     // return xml;
 };
 
