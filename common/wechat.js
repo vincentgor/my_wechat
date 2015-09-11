@@ -9,7 +9,7 @@ var builder = new xml2js.Builder({rootName: 'xml', headless:true});   //去掉xm
 var parseString = xml2js.parseString;
 var util = require('util');
 
-var conf = require('../conf').conf;
+var conf = require('../conf');
 var TReq = require('../model/messageReq/textMessageReq').textMessageReq;
 var TResp = require('../model/messageResp/textMessageResp').textMessageResp;
 
